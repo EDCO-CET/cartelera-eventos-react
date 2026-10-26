@@ -608,6 +608,12 @@ form textarea:focus {
   --rotacion: 2deg;
 }
 
+.formulario-registro {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 /* --------------------------------------------------------------------------
    Footer (fila 4 del grid del body)
    Columnas automáticas: derechos y contacto lado a lado, apilados en móvil.

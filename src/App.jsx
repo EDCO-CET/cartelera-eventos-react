@@ -3,6 +3,8 @@ import ListaEventos from './componentes/ListaEventos'
 import Header from './componentes/Header'
 import Hero from './componentes/Hero'
 import Footer from './componentes/Footer'
+import Contador from './componentes/Contador'
+import FormularioRegistro from './componentes/FormularioRegistro'
 
 const eventos = [
   {
@@ -103,6 +105,10 @@ function App() {
             <h2>Proximos Eventos</h2>
             <ListaEventos eventos={eventos} />
           </section>
+          <section>
+            <h2>Formulario de Registro</h2>
+            <FormularioRegistro />
+          </section>
         </main>
         <aside className="aside aside--info">
           <h2>Info util</h2>
@@ -110,6 +116,7 @@ function App() {
             <h3>Horarios</h3>
             <p>Lunes a viernes de 7pm a 9pm</p>
           </section>
+          <Contador />
         </aside>
       </div>
       <Footer />
