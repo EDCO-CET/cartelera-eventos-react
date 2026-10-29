@@ -2,25 +2,14 @@ import Hero from "../componentes/Hero"
 import ListaEventos from "../componentes/ListaEventos"
 import FormularioRegistro from "../componentes/FormularioRegistro"
 import { useEffect, useState } from "react"
-
+import { useApi } from "../hooks/useApi"
 
 
 function Inicio() {
-
-    const [eventos, setEventos] = useState([]);
-
+    
     const API_URL = 'https://6acffa5d03feaa52b21efe53.mockapi.io/api/v1';
-    useEffect(() => {
-        fetch(API_URL + '/eventos')
-            .then(response => response.json())
-            .then(data => {
-                if (data) {
-                    console.log('Eventos cargados:', data)
-                    setEventos(data);
-                }
-            })
-            .catch(error => console.error(error));
-    }, []);
+    const { loading, error, data: eventos } = useApi(API_URL + '/eventos');
+
 
     return (
         <>
@@ -28,12 +17,15 @@ function Inicio() {
             <div className="layout">
                 <aside className="aside aside--featured">
                 <h2>Eventos Destacados</h2>
-                <ListaEventos eventos={eventos.filter(evento => evento.destacado)} />
+                {!loading && !error && <ListaEventos eventos={eventos.filter(evento => evento.destacado)} />}
                 </aside>
                 <main id="home" className="main">
                 <section id="events">
                     <h2>Proximos Eventos</h2>
-                    <ListaEventos eventos={eventos} />
+                    {loading && <p>Cargando eventos destacados...</p>}
+                    {error && <p>Error: {error}</p>}
+                    {eventos && eventos.length === 0 && <p>No hay eventos disponibles</p>}
+                    {!loading && !error && eventos.length > 0 && <ListaEventos eventos={eventos} />}
                 </section>
                 <section>
                     <h2>Formulario de Registro</h2>
