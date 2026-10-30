@@ -5,7 +5,9 @@ import Footer from './componentes/Footer'
 import { Routes, Route } from 'react-router'
 import Inicio from './pages/Inicio'
 import Admin from './pages/Admin'
+import Login from './pages/Login'
 import Layout from './componentes/Layout'
+import { RutaProtegida } from './componentes/RutaProtegida'
 
 
 
@@ -17,7 +19,10 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Inicio />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route element={<RutaProtegida role="admin" />} >
+            <Route path="/admin" element={<Admin />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
     </>

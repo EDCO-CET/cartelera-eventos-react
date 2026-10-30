@@ -7,8 +7,7 @@ import { useApi } from "../hooks/useApi"
 
 function Inicio() {
     
-    const API_URL = 'https://6acffa5d03feaa52b21efe53.mockapi.io/api/v1';
-    const { loading, error, data: eventos } = useApi(API_URL + '/eventos');
+    const { loading, error, data: eventos } = useApi();
 
 
     return (

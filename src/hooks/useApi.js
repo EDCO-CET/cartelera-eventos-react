@@ -1,8 +1,9 @@
 
 
 import { useState, useEffect } from "react";
+import { obtenerEventos } from "../services/api";
 
-export function useApi(url) {
+export function useApi() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [data, setData] = useState(null);
@@ -13,12 +14,8 @@ export function useApi(url) {
             try {
                 setLoading(true);
                 setError(null);
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error('Error al obtener los datos');
-                }
-                const data = await response.json();
-                setData(data);
+                const eventos = await obtenerEventos();
+                setData(eventos);
             } catch (error) {
                 setError(error);
             } finally {
@@ -26,7 +23,7 @@ export function useApi(url) {
             }
         }    
         obtenerData(); 
-    }, [url]);
+    }, []);
     
     
     return { loading, error, data };
